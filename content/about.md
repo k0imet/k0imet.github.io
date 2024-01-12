@@ -55,6 +55,8 @@ Below are some of my/our achievements.
 
 - #16 Defcon RedTeam Village CTF Finals as fr334aks
 
+- #32 CyberReason CTF 2020 as fr334aks
+  
 - #45 HackTivity CTF as fr334aks
 
 <b>2021</b>
