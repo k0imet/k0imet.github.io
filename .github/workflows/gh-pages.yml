@@ -10,20 +10,13 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
-
       - name: Build
-        # remove --minify tag if you do not need it
-        # docs: https://gohugo.io/hugo-pipes/minification/
         run: hugo --minify
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.HUGO_DEPLOY_TOKEN }}
-          external_repository: k0imet/k0imet.github.io
-          # publish_dir: ./docs
-          #   keep_files: true
+          publish_dir: ./public
           user_name: k0imet
           user_email: kevoskok@gmail.com
           publish_branch: gh-pages
-        #   cname: example.com
