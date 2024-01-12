@@ -1,29 +1,29 @@
-name: Deploy Hugo to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main  # Set your default branch
-
+name: Hugo Deploy
+on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Setup hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: 'latest'
-        extended: true
+      - name: Build
+        # remove --minify tag if you do not need it
+        # docs: https://gohugo.io/hugo-pipes/minification/
+        run: hugo --minify
 
-    - name: Build
-      run: hugo --minify
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.HUGO_DEPLOY_TOKEN }}  # Replace with your secret name
-        publish_dir: ./public
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.HUGO_DEPLOY_TOKEN }}
+          external_repository: k0imet/k0imet.github.io
+          # publish_dir: ./docs
+          #   keep_files: true
+          user_name: k0imet
+          user_email: kevoskok@gmail.com
+          publish_branch: gh-pages
+        #   cname: example.com
