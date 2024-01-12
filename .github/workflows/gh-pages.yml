@@ -3,7 +3,7 @@ name: Deploy Hugo to GitHub Pages
 on:
   push:
     branches:
-      - main  # Set to your default branch
+      - main  # Set your default branch
 
 jobs:
   deploy:
