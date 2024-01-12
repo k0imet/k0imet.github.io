@@ -1,0 +1,4 @@
+baseURL: blog.k0imet.com
+disablePathToLower: true
+languageCode: en-us
+title: k0imet's blog
