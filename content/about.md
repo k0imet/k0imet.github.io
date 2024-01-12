@@ -97,6 +97,7 @@ Below are some of my/our achievements.
 
 - 🥇 Shehacks Intervasity CTF 2023 as Seekers
 - 🥈 Sub Saharan Africa CTF 2023 as fr334aks ( tie on🥇)
+
 🙂 🔽
 
 # Notable Experiences
@@ -109,7 +110,7 @@ Below are some of my/our achievements.
 
 - Led in Technical Organization and Delivery of CyberStars Tanzania 2021-22 Qualification and Finals
 
-- Technical Director Bsides Nairobi Cyber Challenge
+- Technical Director Bsides Nairobi Cyber Challenge 2022
 
 - Technical Director KCA ShehacksKE InterUNI CTF 2022
 
@@ -122,6 +123,7 @@ Below are some of my/our achievements.
 - Challenge Author BIC Defcon31 CTF
 
 - Challenge Author ctfroom.com
-
+  
+- Challenge Author Bsides Nairobi 2023
 
 🙂 🔼
