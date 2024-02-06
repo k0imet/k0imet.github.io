@@ -28,7 +28,7 @@ key: page-about
 About Me
 
 Howdy, 
-My name is Kelvin Njau (Koimet) a Security Analyst at Yelbridges, Ex : Silensec.
+My name is Kelvin Njau (Koimet) a Security Consultant at [CYBER RANGES](cyberranges.com).
 I am also the Founder and Team captain at [fr334aks](https://twitter.com/fr334aks) a competitive MultiNational CTF team 😄. 
 
 Below are some of my/our achievements.
