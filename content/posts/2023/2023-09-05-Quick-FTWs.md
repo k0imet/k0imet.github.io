@@ -80,3 +80,59 @@ mirrorlist=http://mirrors.elrepo.org/mirrors-elrepo.el8
 
 save and ```dnf makecache --refresh```
 <More to come>
+
+Easy ntfs files mount 
+
+... 
+
+Step 1: Identify the Image
+First, you need to ensure that your system recognizes the NTFS filesystem within the .raw image. You can use the file command to confirm the file type and that it's a disk image.
+
+
+
+```bash
+file ntfs.raw
+```
+
+Step 2: Connect the Image as a Loop Device
+Before mounting, you need to connect the raw image file as a loop device. This process makes the file accessible as if it were a physical disk. You might need root privileges for this.
+
+```bash
+sudo losetup -f --show ntfs.raw
+```
+This command will output something like /dev/loop0, indicating the loop device created for your image.
+
+Step 3: Mount the Filesystem
+Once you have your loop device, you can attempt to mount it. If you're dealing with a potentially damaged or non-standard filesystem, you might need to try mounting it read-only at first to prevent any damage.
+
+```bash
+sudo mkdir /mnt/ntfs
+sudo mount -o ro,loop /dev/loop0 /mnt/ntfs
+```
+This sequence of commands creates a mount point at /mnt/ntfs and mounts the loop device there. The -o ro option mounts the filesystem read-only, which is safer for forensic analysis.
+
+If Mounting Fails
+If the standard mounting procedure fails due to filesystem errors or because the filesystem isn't recognized, it's a sign that the file system might be heavily damaged or deleted. In such cases, you'd need to revert to the file recovery and carving methods mentioned previously. Tools like testdisk can sometimes repair the filesystem enough to make it mountable.
+
+Alternative: Using ntfs-3g
+For NTFS filesystems, the ntfs-3g driver provides better compatibility and might offer improved performance and reliability over the kernel's built-in NTFS support.
+
+```bash
+sudo ntfs-3g /dev/loop0 /mnt/ntfs
+```
+This command uses ntfs-3g to mount the filesystem, potentially providing better support for NTFS features and improved read/write reliability.
+
+Accessing the Data
+Once mounted, navigate to the mount point (/mnt/ntfs) and explore the filesystem. You can use standard Linux commands to search for and investigate files, looking for the hidden flag.
+
+```bash
+cd /mnt/ntfs
+ls -la
+```
+Safety and Cleanup
+When you're done, remember to unmount the filesystem and detach the loop device to clean up your environment and prevent any accidental writes or modifications.
+
+```bash
+sudo umount /mnt/ntfs
+sudo losetup -d /dev/loop0
+```
