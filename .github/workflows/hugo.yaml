@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.121.1
+      HUGO_VERSION: "0.121.1"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,11 +31,10 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      # Uses the dedicated setup action instead of manual wget
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
       - name: Setup Pages
@@ -46,7 +45,6 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
-        # Notice we removed the dynamic baseURL override to respect your CNAME
         run: |
           hugo \
             --gc \
