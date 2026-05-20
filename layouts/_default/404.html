@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="error-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; text-align: center;">
+    
+    <pre style="background: transparent !important; border: none !important; color: var(--accent-color); font-size: 1.2rem; line-height: 1.2; overflow: hidden; padding: 0;">
+ _________________________________________
+/ ERROR 404: KERNEL PANIC                 \
+|                                         |
+| The requested payload does not exist.   |
+\ Connection terminated by remote host.   /
+ -----------------------------------------
+        \   ^__^
+         \  (xx)\_______
+            (__)\       )\/\
+             U  ||----w |
+                ||     ||
+    </pre>
+
+    <div style="margin-top: 3rem;">
+        <p style="color: #8b949e; margin-bottom: 1.5rem; font-family: var(--font-mono);">Initiating fallback sequence...</p>
+        <a href="/" class="cloud-tag" style="font-size: 1rem; padding: 0.8rem 1.5rem;">
+            > cd ~/home_directory
+        </a>
+    </div>
+</div>
+{{ end }}

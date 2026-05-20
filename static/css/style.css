@@ -1,0 +1,357 @@
+:root {
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --accent-color: #00ff41; 
+    --code-bg: #161b22;
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "Fira Code", "JetBrains Mono", Consolas, monospace;
+    --border-color: #30363d;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Background Canvas */
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+/* --- Main Window Layout --- */
+.terminal-window {
+    background-color: rgba(13, 17, 23, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    max-width: 900px; 
+    margin: 3rem auto;
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+}
+
+.log-body {
+    min-width: 0; 
+}
+
+/* --- Typography & Links --- */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+/* --- Navigation & Header --- */
+header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li a {
+    font-family: var(--font-mono);
+    color: var(--text-color);
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* --- THE MATRIX HOLOGRAM TOC --- */
+.matrix-toc {
+    position: fixed;
+    top: 5rem;
+    right: 3rem; 
+    width: 280px;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    padding: 1rem;
+    z-index: 5; 
+}
+
+@media (max-width: 1350px) {
+    .matrix-toc {
+        display: none; 
+    }
+}
+
+.matrix-toc::-webkit-scrollbar {
+    width: 4px;
+}
+.matrix-toc::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.matrix-toc .pane-title {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 8px var(--accent-color), 0 0 15px var(--accent-color);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.4);
+    padding-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.matrix-toc #TableOfContents {
+    margin-top: 0.5rem;
+}
+
+.matrix-toc #TableOfContents ul {
+    list-style: none;
+    padding-left: 1rem; 
+    margin: 0;
+    display: block;
+}
+
+.matrix-toc #TableOfContents > ul {
+    padding-left: 0; 
+}
+
+.matrix-toc #TableOfContents li {
+    margin: 0.8rem 0;
+}
+
+.matrix-toc #TableOfContents li a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: rgba(0, 255, 65, 0.7); 
+    text-shadow: 0 0 4px rgba(0, 255, 65, 0.3);
+    display: block;
+    text-decoration: none;
+    line-height: 1.5;
+    transition: all 0.2s ease;
+}
+
+.matrix-toc #TableOfContents li a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px var(--accent-color), 0 0 15px var(--accent-color);
+    padding-left: 6px; 
+}
+
+/* --- Chronological Dropdowns (List Page) --- */
+.year-accordion {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: #161b22;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.year-header {
+    padding: 0.8rem 1.2rem;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgba(48, 54, 61, 0.3);
+    user-select: none;
+    outline: none;
+}
+
+.year-header:hover {
+    background-color: rgba(48, 54, 61, 0.6);
+    color: var(--accent-color);
+}
+
+.year-accordion[open] .year-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.post-list li {
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+}
+
+.post-list li:last-child {
+    border-bottom: none;
+}
+
+.post-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.post-title {
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+/* --- Interactive Tag Bubbles --- */
+.log-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.tag-row {
+    margin-top: 0.5rem;
+    padding-left: 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+/* The Bubble Styling */
+.inline-tag, .cloud-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #8b949e !important;
+    background-color: rgba(13, 17, 23, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 20px; /* Creates the pill/bubble shape */
+    padding: 0.2rem 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+}
+
+/* Hover Effect for Bubbles */
+.inline-tag:hover, .cloud-tag:hover {
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+    text-shadow: none; /* Keeps text crisp inside the bubble */
+    background-color: rgba(0, 255, 65, 0.05); /* Very slight green tint */
+}
+
+.tag-count {
+    color: #8b949e;
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+}
+
+/* --- Codeblock & Copy Button Architecture --- */
+.code-wrapper {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.code-wrapper pre {
+    margin: 0 !important; 
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba(48, 54, 61, 0.8);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0; 
+    transition: all 0.2s ease;
+}
+
+.code-wrapper:hover .copy-button {
+    opacity: 1; 
+}
+
+.copy-button:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+code, pre {
+    font-family: var(--font-mono);
+    border-radius: 6px;
+}
+
+pre {
+    background-color: var(--code-bg) !important; 
+    padding: 1.2rem;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+}
+
+code {
+    padding: 0.2em 0.4em;
+    background-color: var(--code-bg);
+    color: #ff79c6; 
+}
+
+pre code {
+    padding: 0;
+    background-color: transparent;
+    color: inherit; 
+}
+/* --- Image Formatting --- */
+.content img {
+    max-width: 100%;        /* Forces the image to never exceed the window width */
+    height: auto;           /* Maintains the correct aspect ratio */
+    display: block;         /* Removes weird inline spacing bugs */
+    margin: 1.5rem auto;    /* Adds breathing room and centers it */
+    border-radius: 6px;     /* Matches your code blocks and windows */
+    border: 1px solid var(--border-color); /* Gives it a clean terminal frame */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle depth */
+}
+
+/* --- Metadata & Footer --- */
+.post-meta {
+    font-family: var(--font-mono);
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #8b949e;
+}

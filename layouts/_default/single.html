@@ -1,0 +1,32 @@
+{{ define "main" }}
+    <article class="log-body">
+        <header class="log-header">
+            <h1>{{ .Title }}</h1>
+            <div class="post-meta" style="margin-bottom: 1rem; border-bottom: 1px dashed #30363d; padding-bottom: 1rem;">
+                SYS_DATE: {{ .Date.Format "2006-01-02 15:04" }} | SIZE: {{ .WordCount }} words
+            </div>
+            {{ if .Params.tags }}
+            <div class="log-tags" style="margin-bottom: 2rem;">
+                {{ range .Params.tags }}
+                <a href="/tags/{{ . | urlize }}" class="inline-tag">#{{ . }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </header>
+
+        <div class="content">
+            {{ .Content }}
+        </div>
+    </article>
+
+    <script src="/js/copy.js"></script>
+{{ end }}
+
+{{ define "matrix-widgets" }}
+    {{ if and (gt .WordCount 150) .TableOfContents }}
+    <aside class="matrix-toc">
+        <div class="pane-title">📍 PAGE_INDEX</div>
+        {{ .TableOfContents }}
+    </aside>
+    {{ end }}
+{{ end }}

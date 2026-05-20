@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1>Taxonomy Index: /tags/</h1>
+<p style="color: #8b949e; margin-bottom: 2rem;">System keywords mapped across available content matrix:</p>
+
+<div class="tags-cloud">
+    {{ range .Data.Terms.Alphabetical }}
+    <a href="{{ .Page.Permalink }}" class="cloud-tag">
+        {{ .Page.Title }} <span class="tag-count">({{ .Count }})</span>
+    </a>
+    {{ end }}
+</div>
+{{ end }}

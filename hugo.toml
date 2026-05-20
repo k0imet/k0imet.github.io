@@ -1,0 +1,25 @@
+baseURL = "https://blog.k0imet.com/"
+languageCode = "en-us"
+title = "k0imet // syslog"
+
+[params]
+  author = "Kelvin Njau"
+  description = "Cybersecurity, Development, and random logs."
+
+# Enable Taxonomies
+[taxonomies]
+  tag = "tags"
+
+# High-Performance Syntax Highlighting Configuration
+[markup]
+  [markup.highlight]
+    codeFences = true       # Highlight code blocks wrapped in ```
+    guessSyntax = true      # Try to guess language if not specified
+    lineNos = true          # Show line numbers
+    lineNumbersInTable = false
+    style = "monokai"       # Dark, terminal-friendly syntax palette
+    noClasses = true        # Inline styles to prevent needing a separate CSS file
+  [markup.tableOfContents]
+    startLevel = 2          # Capture H2
+    endLevel = 4            # Capture down to H4
+    ordered = false

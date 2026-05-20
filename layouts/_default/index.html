@@ -1,0 +1,17 @@
+{{ define "main" }}
+    <section class="intro">
+        <h1>System Status: Online</h1>
+        <p>Welcome to my personal syslog. Security research, development logs, and occasional rants.</p>
+    </section>
+
+    <h2>Latest Writeups</h2>
+    <ul class="post-list" style="list-style: none; padding: 0;">
+        {{ range first 5 (where .Site.RegularPages "Type" "posts") }}
+        <li style="margin-bottom: 1rem;">
+            <span class="post-meta">{{ .Date.Format "2006-01-02" }}</span> &raquo; 
+            <a href="{{ .Permalink }}" style="font-size: 1.1rem; font-weight: bold;">{{ .Title }}</a>
+        </li>
+        {{ end }}
+    </ul>
+    <a href="/posts/">[ View all logs ]</a>
+{{ end }}

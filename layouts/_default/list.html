@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="archive-container">
+    <h1>Directory: /{{ .Type }}/</h1>
+    <p style="color: #8b949e; margin-bottom: 2rem;">Click on a year block to expand historical logs.</p>
+
+    <!-- Group posts natively by Year -->
+    {{ range .Pages.GroupByDate "2006" }}
+    <details class="year-accordion" open>
+        <summary class="year-header">
+            <span class="dir-icon">📁</span> {{ .Key }} <span class="count">({{ len .Pages }} logs)</span>
+        </summary>
+        <ul class="post-list">
+            {{ range .Pages }}
+            <li>
+                <div class="post-row">
+                    <span class="post-meta">[{{ .Date.Format "01-02" }}]</span>
+                    <a href="{{ .Permalink }}" class="post-title">{{ .Title }}</a>
+                </div>
+                {{ if .Params.tags }}
+                <div class="tag-row">
+                    {{ range .Params.tags }}
+                    <a href="/tags/{{ . | urlize }}" class="inline-tag">#{{ . }}</a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </li>
+            {{ end }}
+        </ul>
+    </details>
+    {{ end }}
+</div>
+{{ end }}
