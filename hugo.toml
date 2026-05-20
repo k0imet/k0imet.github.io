@@ -1,6 +1,6 @@
 baseURL = "https://blog.k0imet.com/"
 languageCode = "en-us"
-title = "k0imet // syslog"
+title = "k0imet // int0x80"
 
 [params]
   author = "Kelvin Njau"
