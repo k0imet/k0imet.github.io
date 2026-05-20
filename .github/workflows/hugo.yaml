@@ -31,15 +31,27 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      # Uses the dedicated setup action instead of manual wget
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
 
-      - name: Build with Hugo
-        run: hugo --minify
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
 
+      - name: Build with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        # Notice we removed the dynamic baseURL override to respect your CNAME
+        run: |
+          hugo \
+            --gc \
+            --minify
+            
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
