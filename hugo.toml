@@ -23,3 +23,7 @@ title = "k0imet // int0x80"
     startLevel = 2          # Capture H2
     endLevel = 4            # Capture down to H4
     ordered = false
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
